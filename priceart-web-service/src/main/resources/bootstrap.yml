@@ -1,0 +1,60 @@
+# ==============================================================
+# = PriceArt Web Service 
+# ==============================================================
+
+server:
+  #port: 5071
+  port: 507${seq}
+ 
+spring:
+  application:
+    name: PriceArtWebService
+# ==============================================================
+# = Cloud Parameteres
+# ==============================================================
+  cloud:
+# ==============================================================
+# = Proprietà Config Server
+# ==============================================================
+    config:
+      #uri: http://localhost:8888
+      profile: ${profilo}
+      #profile: std1
+      username: user
+      password: BimBumBam_2018
+      #label: list3
+      fail-fast: true
+      discovery:
+        #serviceId: CONFIGSERVER
+        enabled: true 
+        
+# ==============================================================
+# = Eureka Properties  
+# = Nota: prima di attivare il servizio servono tre heartbeat
+# ==============================================================
+eureka:
+# ==============================================================
+# = Impostazioni Instance
+# ============================================================== 
+  instance:
+    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+    lease-expiration-duration-in-seconds: 60
+    #intervallo di invio dell'heartbeat (def 30 sec)
+    leaseRenewalIntervalInSeconds: 15
+    #id di identificazione dell'istanza
+    instanceId: ${server.port}-${spring.application.name}-${seq}
+    #registrazione per indirizzo ip (defualt hostname)
+    preferIpAddress: true
+# ==============================================================
+# = Impostazioni Client
+# ============================================================== 
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+     defaultZone:  http://user:BimBumBam_2018@localhost:8761/eureka/,http://user:BimBumBam_2018@localhost:8762/eureka/
+    #time out di connessione in secondi al server Eureka (def 5 sec) 
+    eureka-server-connect-timeout-seconds: 8
+    
+    
+    

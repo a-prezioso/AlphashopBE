@@ -1,0 +1,180 @@
+# ==============================================================
+# = Articoli Web Service - Versione Autenticazione JWT
+# ==============================================================
+
+server:
+  #port: 5051
+  port: 505${seq}
+
+spring:
+  application:
+    name: ProductsWebService
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+# ==============================================================
+# = DBMS PostgreSQL Parameters
+# ==============================================================
+  datasource:
+    initialization-mode: always
+    password: Alex1993!
+    platform: postgres
+    url: jdbc:postgresql://localhost:5433/Alphashop
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+    
+# ==============================================================
+# = ZipKin parameters
+# ==============================================================
+  zipkin:
+    baseUrl: http://localhost:9411/
+    sender:
+      type: web
+     #type: rabbit  
+    message-timeout: 5
+# ==============================================================
+# = Sleuth parameters
+# ==============================================================
+  sleuth:
+    sampler:
+      probability: 1.0
+    traceId128: false
+
+# ==============================================================
+# = Feign Parameters
+# ============================================================== 
+feign:
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+  httpclient:
+    connection-timeout: 3000
+  client:
+    config:
+      default:
+        connectTimeout: 300000 #5 MINUTI
+        readTimeout: 300000
+        
+
+# ==============================================================
+# = Eureka Properties  
+# = Nota: prima di attivare il servizio servono tre heartbeat
+# ==============================================================
+eureka:
+# ==============================================================
+# = Impostazioni Instance
+# ============================================================== 
+  instance:
+    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+    lease-expiration-duration-in-seconds: 60
+    #intervallo di invio dell'heartbeat (def 30 sec)
+    leaseRenewalIntervalInSeconds: 15
+    #id di identificazione dell'istanza
+    instanceId: ${server.port}-${spring.application.name}-${seq}
+    #registrazione per indirizzo ip (defualt hostname)
+    preferIpAddress: true
+# ==============================================================
+# = Impostazioni Client
+# ============================================================== 
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+     defaultZone: ${EUREKA_URL:http://user:BimBumBam_2018@localhost:8761/eureka/}
+    #time out di connessione in secondi al server Eureka (def 5 sec) 
+    eureka-server-connect-timeout-seconds: 8 
+   
+        
+# ==============================================================
+# = Ribbon Parameters
+# ============================================================== 
+#PriceArtWebService:
+#  ribbon:
+#    listOfServers: http://localhost:5071,http://localhost:5072,http://localhost:5073
+
+
+# ==============================================================
+# = Actuator Parameters
+# ==============================================================
+management:
+  info:
+    git:
+      mode: full
+  endpoint:
+    health:
+      show-details: WHEN_AUTHORIZED
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,hystrix.stream
+        
+# ==============================================================
+# = Actuator Info
+# ==============================================================
+info:
+  assistenza:
+    nome: "Alex Prezioso"
+    mail: "a.prezioso@yahoo.com"
+    telefono: "3888009306"
+    orario: "9-20"
+  nome:
+    nome-app: "Articoli Web Service - Versione Autenticazione JWT"
+
+# ==============================================================
+# = Proprietà Logging
+# = Default ERROR, WARN e INFO 
+# = Levels: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
+# ============================================================== 
+logging:
+  file:
+    name: ArtSrv.log
+    max-size: 1MB
+    #path: "/logs"
+  pattern:
+    file: "%d{ dd-MM-yyyy } [%thread] %-5level %logger{36} - %msg%n"
+    #console: "%d{dd-MM-yyyy HH:mm:ss} - %msg%n"
+    
+  # Livello del Log generale
+  level:
+  # root: WARN
+  # Livello di log specifico
+   org.springframework.security: DEBUG
+   org.hibernate: INFO
+   org.springframework.web: INFO
+   com.xantrix.webapp.controller: INFO
+    
+# ==============================================================
+# = Proprietà Servizio gestUser
+# ==============================================================          
+gestuser:
+  password: Alex1993!!
+  srvUrl: http://localhost:8019/api/utenti/cerca/userid/
+  userId: ReadUser
+  
+  # ==============================================================
+# = Parametri Sicurezza JWT 
+# ==============================================================
+sicurezza:
+    uri: /auth
+    refresh: /refresh
+    header: Authorization
+    prefix: Bearer 
+    expiration: 86400
+    #la secret del token per validare la signature del token
+    secret: 123_Stella
+
+  
+  
+

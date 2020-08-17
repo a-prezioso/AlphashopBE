@@ -1,0 +1,23 @@
+# ==============================================================
+# = Authentication Server JWT
+# = PROFILO GIT
+# ==============================================================
+
+spring:
+  application:
+    name: config-server-git
+  cloud:
+    config:
+      server:
+        git:
+          uri: D:\Alex\JAVA\Progetti\Alphashop\AlphashopTwoVersion\GitConfigAlphashopJWT
+          
+# ==============================================================
+# = Actuator Info
+# ==============================================================
+info:
+  assistenza:
+    nome: "Alex Prezioso"
+  nome:
+    nome-app: "Config-Server"
+    profilo: "GIT"

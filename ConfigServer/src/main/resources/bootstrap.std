@@ -1,0 +1,46 @@
+# ==============================================================
+# = Config Server Base
+# = end point: http://localhost:8888/{application-name}/{profile}[/{label}]
+# ==============================================================
+
+server:
+  port: 8888
+  
+# ==============================================================
+# = Profilo Attivo
+# ==============================================================  
+spring:
+  profiles:
+    active: github
+#  security:
+#    user:
+#      password: 123Test
+    
+# ==============================================================
+# = Actuator Parameters
+# ==============================================================
+management:
+  endpoint:
+    health:
+      show-details: WHEN_AUTHORIZED
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+        
+# ==============================================================
+# = Logs Parameters
+# ==============================================================        
+logging:
+  level:
+    org.springframework.cloud: DEBUG
+    org.springframework.security: DEBUG
+    
+# ==============================================================
+# = Security Parameters
+# ============================================================== 
+sicurezza:
+  userpwd: 'BimBumBam_2018'
+  adminpwd: 'MagicaBula_2018'  
+  
+  

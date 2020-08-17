@@ -1,0 +1,27 @@
+# ==============================================================
+# = Authentication Server JWT
+# = PROFILO GITHUB
+# ==============================================================
+
+spring:
+  application:
+    name: config-server-github
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/a-prezioso/git-config-repository
+          username: a-prezioso
+          password: Ganjaman3!
+          cloneOnStart: true
+          
+# ==============================================================
+# = Actuator Info
+# ==============================================================
+info:
+  assistenza:
+    nome: "Alex Prezioso"
+  nome:
+    nome-app: "Config-Server"
+    profilo: "GITHUB"
+          

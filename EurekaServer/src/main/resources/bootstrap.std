@@ -1,0 +1,46 @@
+# ==============================================================
+# = Discovery Service Eureka Server
+# = Dash: http://localhost:8761
+# ==============================================================
+
+server:
+  port: 8761
+  tomcat:
+    max-threads: 5
+    
+spring:
+  application:
+    name: EurekaServer
+# ==============================================================
+# = Cloud Parameters
+# ==============================================================
+  cloud:
+# ==============================================================
+# = Proprietà Config Server
+# ==============================================================
+    config:
+      uri: http://localhost:8888
+      profile: ${profilo}
+      #profile: std1
+      username: user
+      password: BimBumBam_2018
+      #label: list3
+      fail-fast: true
+
+# ==============================================================
+# = Eureka Endpoints
+# ==============================================================        
+#GET /eureka/apps = visualizza i dettagli di tutte le istanze delle app registrate
+#GET /eureka/apps/[appID] = visualizza i dettagli di una specifica app
+#GET /eureka/apps/[appID]/[instanceID] = visualizza i dettagli di una istanza di una specifica app
+#PUT /eureka/apps/[appID]/[instanceID] = Invia un heartbeat ad una specifica istanza  di una app
+#DELETE /eureka/apps/[appID]/[instanceID] = Elimina una specifica istanza della app selezionata
+#POST /eureka/apps/[appID] = aggiunge una istanza della app selezionata        
+
+    
+    
+   
+    
+    
+    
+    

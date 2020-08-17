@@ -1,0 +1,187 @@
+# ==============================================================
+# = Config Server Base con Autenticazione
+# = end point: http://localhost:8888/{application-name}/{profile}[/{label}]
+# = avvio: java -jar -XX:MaxRAM=72m -XX:+UseSerialGC -Xss512k configserver-0.0.1-SNAPSHOT.jar
+# ==============================================================
+
+server:
+  port: 8888
+  tomcat:
+    max-threads: 5
+  
+# ==============================================================
+# = Profilo Attivo PEER 1
+# ==============================================================  
+spring:
+  profiles: peer1
+  application:
+    name: ConfigServer
+# ==============================================================
+# = Cloud Parameters
+# ============================================================== 
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/a-prezioso/git-config-repository
+          username: a-prezioso
+          password: Ganjaman3!
+          cloneOnStart: true
+          
+# ==============================================================
+# = Eureka Properties  
+# = Nota: prima di attivare il servizio servono tre heartbeat
+# ==============================================================
+eureka:
+# ==============================================================
+# = Impostazioni Instance
+# ============================================================== 
+  instance:
+    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+    lease-expiration-duration-in-seconds: 60
+    #intervallo di invio dell'heartbeat (def 30 sec)
+    leaseRenewalIntervalInSeconds: 15
+    #id di identificazione dell'istanza
+    instanceId: ${server.port}-${spring.application.name}-1
+    #registrazione per indirizzo ip (defualt hostname)
+    preferIpAddress: true
+# ==============================================================
+# = Impostazioni Client
+# ============================================================== 
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+     defaultZone: http://user:BimBumBam_2018@localhost:8761/eureka/,http://user:BimBumBam_2018@localhost:8762/eureka/
+    #time out di connessione in secondi al server Eureka (def 5 sec) 
+    eureka-server-connect-timeout-seconds: 8
+    
+# ==============================================================
+# = Actuator Parameters
+# ==============================================================
+management:
+  endpoint:
+    health:
+      show-details: WHEN_AUTHORIZED
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+        
+# ==============================================================
+# = Actuator Info
+# ==============================================================
+info:
+  assistenza:
+    nome: "Alex Prezioso"
+  nome:
+    nome-app: "Config-Server"
+    profilo: "GITHUB"
+        
+# ==============================================================
+# = Logs Parameters
+# ==============================================================        
+logging:
+  level:
+    org.springframework.cloud: DEBUG
+    org.springframework.security: DEBUG
+    
+# ==============================================================
+# = Security Parameters
+# ============================================================== 
+sicurezza:
+  userpwd: 'BimBumBam_2018'
+  adminpwd: 'MagicaBula_2018'  
+  
+---
+
+server:
+  port: 8889
+  tomcat:
+    max-threads: 5
+  
+# ==============================================================
+# = Profilo Attivo PEER 2
+# ==============================================================  
+spring:
+  profiles: peer2
+  application:
+    name: ConfigServer
+# ==============================================================
+# = Cloud Parameters
+# ============================================================== 
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/a-prezioso/git-config-repository
+          username: a-prezioso
+          password: Ganjaman3!
+          cloneOnStart: true
+          
+# ==============================================================
+# = Eureka Properties  
+# = Nota: prima di attivare il servizio servono tre heartbeat
+# ==============================================================
+eureka:
+# ==============================================================
+# = Impostazioni Instance
+# ============================================================== 
+  instance:
+    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+    lease-expiration-duration-in-seconds: 60
+    #intervallo di invio dell'heartbeat (def 30 sec)
+    leaseRenewalIntervalInSeconds: 15
+    #id di identificazione dell'istanza
+    instanceId: ${server.port}-${spring.application.name}-2
+    #registrazione per indirizzo ip (defualt hostname)
+    preferIpAddress: true
+# ==============================================================
+# = Impostazioni Client
+# ============================================================== 
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+     defaultZone: http://user:BimBumBam_2018@localhost:8761/eureka/,http://user:BimBumBam_2018@localhost:8762/eureka/
+    #time out di connessione in secondi al server Eureka (def 5 sec) 
+    eureka-server-connect-timeout-seconds: 8
+    
+# ==============================================================
+# = Actuator Parameters
+# ==============================================================
+management:
+  endpoint:
+    health:
+      show-details: WHEN_AUTHORIZED
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+        
+# ==============================================================
+# = Actuator Info
+# ==============================================================
+info:
+  assistenza:
+    nome: "Alex Prezioso"
+  nome:
+    nome-app: "Config-Server"
+    profilo: "GITHUB"
+        
+# ==============================================================
+# = Logs Parameters
+# ==============================================================        
+logging:
+  level:
+    org.springframework.cloud: DEBUG
+    org.springframework.security: DEBUG
+    
+# ==============================================================
+# = Security Parameters
+# ============================================================== 
+sicurezza:
+  userpwd: 'BimBumBam_2018'
+  adminpwd: 'MagicaBula_2018'  
+  
+  

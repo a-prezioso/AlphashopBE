@@ -1,0 +1,10 @@
+# ==============================================================
+# = Saluti Web Service - Versione Base
+# ==============================================================
+
+server:
+  port: 5000
+
+spring:
+  application:
+    name: SalutiWebService
