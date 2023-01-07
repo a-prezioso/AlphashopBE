@@ -1,2 +1,2 @@
 # AlphashopSpring
-Backend di gestione di articoli, ordini, clienti e listini prezzi. Hostato su AWS. Oltre alla normale implementazione del progetto in spring boot sono stati utilizzati vari moduli dello spring cloud: Zuul, Hystrix, Eureka e il rabbitMQ per la gestione dei messaggi e code. Il progetto infine viene deployato in cloud tramite Elastic Beanstalk, utilizzando l'RDS sempre della nota piattaforma.
+Backend for managing customers, orders, and price lists for Alphashop. Zuul, Hystrix, Eureka, and rabbitMQ have been used as spring cloud modules in addition to the project's standard spring boot implementation to manage messages and queues. Finally, using Elastic Beanstalk and the well-known platform's RDS, the project is deployed in the cloud.
